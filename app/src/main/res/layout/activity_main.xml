@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.bsw.mvvmdemo.bean.UserBean" />
+
+
+        <!--<import type="com.bsw.mvvmdemo.bean.UserBean"/>-->
+        <!--<variable-->
+        <!--name="user"-->
+        <!--type="UserBean"/>-->
+
+        <!--<import type="com.bsw.mvvmdemo.bean.UserBean" alias="bsw_user_bean"/>-->
+        <!--<variable-->
+        <!--name="user"-->
+        <!--type="bsw_user_bean"/>-->
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.bsw.mvvmdemo.MainActivity"
+        tools:ignore="HardcodedText">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入用户名"
+            android:text="@{user.username??user.nickname}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入昵称"
+            android:text="@{`username is :`+user.nickname}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{Integer.valueOf(user.age) &lt; 30 ? 0xFF0000FF:0xFFFF0000}"
+            android:hint="请输入年龄"
+            android:text="@{String.valueOf(user.age)}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{user.toast}"
+            android:text="输出" />
+
+        <!--@={user.username}使用" = "双向绑定，保证EditText输入文本会同步修改UserBean-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入用户名"
+            android:inputType="text"
+            android:text="@={user.username}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入昵称"
+            android:inputType="text"
+            android:text="@={user.nickname}" />
+
+        <!--双向绑定时，不能使用String.valueOf转换-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入年龄"
+            android:inputType="number"
+            android:text="@={user.age}" />
+    </LinearLayout>
+</layout>
